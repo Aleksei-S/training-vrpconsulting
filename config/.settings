@@ -1,0 +1,15 @@
+{
+    "projectName": "training",
+    "username": "aleksei@brest.com",
+    "id": "386abb40-d975-11e8-8aab-c76a9cc6fe34",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://ap4.salesforce.com",
+    "workspace": "C:\\Users\\Leha\\Documents",
+    "subscription": [
+        "ApexClass",
+        "ApexPage",
+        "ApexTrigger"
+    ]
+}

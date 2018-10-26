@@ -1,0 +1,230 @@
+<apex:page sidebar="false" controller="ProductDetailController" docType="html-5.0">
+    <apex:slds /> 
+    
+    <div class="slds-scope">
+        
+        
+        <table class="slds-table slds-table_bordered slds-no-row-hover slds-table_fixed-layout">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-heading_medium" scope="col">
+                        <div class="slds-truncate slds-text-align_center slds-m-vertical_xx-small">Contact information</div>
+                    </th>
+                    <th class="slds-text-heading_medium" scope="col">
+                        <div class="slds-truncate slds-text-align_center slds-size_2-of-3 slds-m-vertical_xx-small">Product information</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+                
+                <tr class="slds-hint-parent">
+                    <th data-label="col contact info" scope="row">                  
+                        
+                        <apex:form >
+                            <apex:actionFunction name="Order"
+                                                 action="{!Order}"
+                                                 reRender="message" >
+                                <apex:param value="" name="mail"/>
+                                <apex:param value="" name="firstName"/>
+                                <apex:param value="" name="lastName"/>
+                                <apex:param value="" name="count"/>
+                            </apex:actionFunction> 
+                        </apex:form>                  
+                        <!--                        
+
+
+<apex:panelGroup id="CheckEMail">
+-->
+                        
+                        <!-- 1 col -->
+                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-align-center">
+                            
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle" >
+                                <div class="slds-text-align_right">Email</div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle">
+                                <input id="Email" class="slds-input slds-size_2-of-3 slds-m-vertical_xx-small" type="mail" value="" onchange='checkMail(value)'/>
+                            </div>
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle">
+                                <div class="slds-text-align_right">First Name</div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle">
+                                <input id="FirstName" class="slds-input slds-size_2-of-3 slds-m-vertical_xx-small" type="text" value="" onchange="validate(event.target, 'FirstName')" />
+                                <div class="slds-form-element__help" id="error-message-for-FirstName" style="color:red; display:none">This field is required</div>
+                            </div> 
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle">
+                                <div class="slds-text-align_right">Last Name</div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-6 slds-align-middle">
+                                <input id="LastName" class="slds-input slds-size_2-of-3 slds-m-vertical_xx-small" type="text" value="" onchange="validate(event.target, 'LastName')" />
+                                <div class="slds-form-element__help" id="error-message-for-LastName" style="color:red; display:none">This field is required</div>
+                            </div>
+                            
+                        </div>    
+                        
+                        <!-- </apex:panelGroup>   -->                   
+                        
+                        
+                        
+                        
+                    </th>
+                    <td data-label="col productinfo">
+                        
+                        <!-- 2 col -->
+                        
+                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-align-center" >
+                            
+                            <div class="slds-col slds-size_4-of-12 slds-align-middle">
+                                <div class="slds-text-align_right slds-m-vertical_xx-small">Product Name</div>
+                            </div>
+                            <div class="slds-col slds-size_8-of-12 slds-align-middle">
+                                <div class="slds-text-align_left slds-m-vertical_xx-small">{!product.Name}</div>
+                            </div>
+                            
+                            <div class="slds-col slds-size_4-of-12 slds-align-middle">
+                                <div class="slds-text-align_right slds-m-vertical_xx-small">Cost</div>
+                            </div>
+                            <div class="slds-col slds-size_8-of-12 slds-align-middle">
+                                <div id="Unit_Price" class="slds-text-align_left slds-m-vertical_xx-small">{!product.Unit_Price__c}</div>
+                            </div> 
+                            <div class="slds-col slds-size_4-of-12 slds-align-middle">
+                                <div class="slds-text-align_right slds-m-vertical_xx-small">Unit count</div>
+                            </div>
+                            <div class="slds-col slds-size_8-of-12 slds-align-middle">
+                                <input id="count" class="slds-input slds-size_1-of-5 slds-m-vertical_xx-small" type="integer" value="" onchange='setCountUnit(value)' />
+                                <div class="slds-form-element__help" id="error-message-for-count" style="color:red; display:none">press number</div>     
+                            </div>
+                            <div class="slds-col slds-size_4-of-12 slds-align-middle">
+                                <div class="slds-text-align_right slds-m-vertical_xx-small">Total Amount</div>
+                            </div>
+                            <div class="slds-col slds-size_8-of-12 slds-align-middle" >
+                                <div class="slds-text-align_left slds-m-vertical_xx-small">
+                                     <div id="TotalAmount" class="slds-text-align_left slds-m-vertical_xx-small"></div>
+                               <!--       <apex:outputText id="TotalAmount" value="{!unitCount * product.Unit_Price__c}"></apex:outputText>
+                               -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </td>
+                    
+                </tr>
+            </tbody>
+            <tfooter>
+                
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-title_bold slds-text-align_center" colspan="2" scope="col">
+                        
+                        
+                        
+                        
+                        
+                        <apex:outputLink value="/apex/ProductTablePage" >
+                            <div class="slds-button slds-button_neutral slds-m-around_x-small">To Shoping</div >
+                        </apex:outputLink>
+                        
+                        <button class="slds-button slds-button_brand slds-m-around_x-small" onclick="Buy()">Buy</button>
+                        
+                        <!--
+<apex:form id="buttonsBuy">
+<apex:commandButton styleClass="slds-button slds-button_brand slds-m-around_x-small" action="Buy()" value="Buy"  />  
+/apex:form>
+?ProductId=a016F00001qJanZQAS
+-->
+                        
+                        
+                    </th>
+                </tr>
+            </tfooter>
+            
+            
+        </table>
+        
+        <div class="slds-text-heading_medium slds-text-align_center">
+           <apex:outputText id="message" value="{!message}"></apex:outputText>                         
+        </div> 
+       
+        
+        
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script> 
+    
+    function setCountUnit(num) {
+        let patt = new RegExp("^[1-9][0-9]{0,10}$");
+        if(!patt.test(num)){
+            document.getElementById('error-message-for-count').style.display = 'block';
+            return false;
+        } else {
+            document.getElementById('error-message-for-count').style.display = 'none';           
+         
+          document.getElementById('TotalAmount').innerHTML = (document.getElementById('Unit_Price').innerHTML * num).toFixed(2) ;   
+            return true;
+        }
+        
+    }
+    function checkMail(mail) {
+        
+        Visualforce.remoting.Manager.invokeAction(
+            
+            '{!$RemoteAction.ProductDetailController.CheckEMail}',
+            mail,       
+            function(result, event){
+                console.log(result);
+                if(event.status && event.result){
+                    document.getElementById('FirstName').value = result.FirstName;
+                    document.getElementById('LastName').value = result.LastName;            
+                } else {
+                    document.getElementById('FirstName').value = '';
+                    document.getElementById('LastName').value = '';   
+                }              
+            },
+            {escape: true}
+        );
+    }     
+    
+    function Buy() {
+        
+        let mail = document.getElementById('Email');
+        let FirstName = document.getElementById('FirstName');
+        let LastName = document.getElementById('LastName');
+        
+        if(validate(FirstName , 'FirstName') && validate(LastName , 'LastName') && setCountUnit(document.getElementById('count').value)) {
+            Order(mail.value, FirstName.value, LastName.value, document.getElementById('count').value );
+        } else {
+            return;
+        }
+        
+        
+        
+    }
+    
+    function validate(e, str) {
+        console.log(e);
+        let patt = new RegExp("^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$");
+        if(!patt.test(e.value)){
+            document.getElementById('error-message-for-'+str).style.display = 'block';
+            return false;
+        } else {
+            document.getElementById('error-message-for-'+str).style.display = 'none';
+            return true;
+        }
+        
+    }
+    
+    </script>
+    
+</apex:page>

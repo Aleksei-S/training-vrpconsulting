@@ -1,0 +1,82 @@
+<apex:page controller="ProductTableController" sidebar="false"> 
+    
+    <apex:slds /> 
+    
+    <div class="slds-scope">
+        <div  class="slds-text-title_bold slds-m-vertical_small">
+            Product List
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="">
+                    <th class="slds-text-title_caps slds-col slds-size_1-of-12">
+                        image
+                    </th>
+                    <th class="slds-col slds-size_1-of-12">
+                    </th>
+                    <th class="slds-text-title_caps slds-col slds-size_2-of-12">
+                        title
+                    </th>
+                    <th class="slds-text-title_caps slds-col slds-size_6-of-12">
+                        description
+                    </th>
+                    <th class="slds-text-title_caps slds-col slds-size_1-of-12">
+                        <div class="">cost</div>
+                    </th>
+                    <th class="slds-col slds-size_1-of-12">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{! productsList }" var="ct" >
+                    <tr class="slds-hint-parent" >     
+                        <td class="slds-col"  scope="row">                        
+                            <a href="#" class="slds-file__crop slds-file__crop_1-by-1">
+                                <img src="{! ct.Image_Url__c }" />
+                            </a>
+                        </td>   
+                        <td class="slds-col"  scope="row">
+                            <apex:outputLink value="//apex/ProductDetails?ProductId={!ct.Id }" target="_blank">{! ct.Name }</apex:outputLink>
+                        </td>             
+                        <td class="slds-col slds-align-middle"  scope="row">
+                            <div class="slds-truncate">{! ct.Title__c }</div>
+                        </td>   
+                        <td class="slds-col"  scope="row">
+                            
+                            <div class="slds-cell-wrap slds-truncate">
+                                {!IF(LEN(ct.Product_Description__c) > 100, LEFT(ct.Product_Description__c, 100) + '...' , ct.Product_Description__c)}
+                                <span><apex:outputLink value="//apex/ProductDetails?ProductId={!ct.Id }" target="_blank">More</apex:outputLink></span>
+                            </div>
+                        </td>   
+                        <td class="slds-col slds-align-middle"  scope="row">
+                            <div class="slds-truncate">{! ct.Unit_Price__c}<span> {!IF(ISBLANK(ct.Unit_Price__c), '', '$')}</span></div>
+                        </td>            
+                        <td class="slds-col"  scope="row">                    
+                            
+                            <apex:form id="buttonBuy">
+                                
+                                <apex:commandButton styleClass="slds-button slds-button_brand" action="{! getPageProductDetails }" value="Buy" reRender="buttonBuy">
+                                    <apex:param value="{!ct.Id }" name="IdProductParam" assignTo="{!paramValue}"/>
+                                </apex:commandButton>
+                            
+                            </apex:form>
+                            
+                            
+                        </td>                                    
+                        
+                    </tr>
+                </apex:repeat>
+                
+                
+            </tbody>          
+            
+        </table>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</apex:page>
